@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+# Intro
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a simple and easy demonstration of how the useEffect Hook works on React. Additionally it also make use of theuseState Hook, Tailwind CSS and a setTimeout function.
 
-## Available Scripts
+You can visit the site [here](https://useeffect-rho.vercel.app/).
 
-In the project directory, you can run:
+## How it works
 
-### `npm start`
+Learn how two of the most common Hooks works: 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### `useEffect`
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+useEffect(() => {
+  if (isLoading) { // ⬅️ solo hacer request si estamos en modo "cargando"
+    fetch("https://dog.ceo/api/breeds/image/random")
+      .then((response) => response.json())
+      .then((dog) => {
+        setImageUrl(dog.message);
+        setIsLoading(false);
+      });
+  }
+}, [isLoading]); // ⬅️ ahora este efecto se ejecutará cada vez que cambie este estado
 
-### `npm test`
+### `useState`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+const [isLoading, setIsLoading] = useState(true);
+const [imageUrl, setImageUrl] = useState(null);
 
-### `npm run build`
+## What else?
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### `setTimeout`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The setTimeout() function set a waiting time to load the component. Below you can see how to use it along with the useEffect Hook.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+First, you write the useEffect Hook and inside you put your setTimeout function with the time you want to wait before the component loads.
 
-### `npm run eject`
+Last, inside the setTimeout function you will put all the code that was inside the useEffect Hook before.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+useEffect(() => {
+  const timer = setTimeout(() => {
+    console.log('This will run after 1 second!')
+  }, 1000);
+  return () => clearTimeout(timer);
+}, []);
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### `Tailwind CSS`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The site uses Tailwind CSS which I highly recomment. The most interesting line of code here is the one that centers the content both horizontal and vertical:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+flex flex-col h-screen my-auto items-center justify-center
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+flex: Same as display: flex on CSS.
+flex-col: Same as flex-direction: column on CSS.
+h-screen: Same as Height: 100vh on CSS. Makes the height the same as the user's screen.
