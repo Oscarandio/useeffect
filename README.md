@@ -24,8 +24,8 @@ Learn how two of the most common Hooks works:
 ### `useState`
 
 ```const [isLoading, setIsLoading] = useState(true);
-const [imageUrl, setImageUrl] = useState(null);```
-
+const [imageUrl, setImageUrl] = useState(null);
+```
 ## What else?
 
 ### `setTimeout`
@@ -41,7 +41,8 @@ Last, inside the setTimeout function you will put all the code that was inside t
     console.log('This will run after 1 second!')
   }, 1000);
   return () => clearTimeout(timer);
-}, []);```
+}, []);
+```
 
 ### `Tailwind CSS`
 
